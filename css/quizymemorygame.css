@@ -62,12 +62,11 @@
 /* styles for the game summary */
 #quizy-game-summary {
   width:300px;
-  height:160px;
+  height:180px;
   position:absolute;
   z-index:1001;
-  background: #515b69;
-  box-shadow: rgba(0,0,0,0.7) 0 0 4px, inset 0 0 20px rgba(0, 0, 0, 0.4);;
-  border:1px solid #000;
+  background: #C2A34F;
+  border:1px solid #f2ecda;
   display:none;
   text-align: center;
 }
@@ -106,7 +105,9 @@
   width: 70px;
   padding: 10px;
   text-align: center;
-  background: #D7EEF0;
+  background: #fff;
+  border: 1px solid #f2ecda;
+  color: #C2A34F;
   cursor: pointer;
 }
 
