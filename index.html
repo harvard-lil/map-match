@@ -37,6 +37,10 @@
     <div class="row">
       <div class="twelve columns">
         <h4>Match the Map</h4>
+        <form>
+        	<label for="name">Your name</label>
+        	<input id="name" name="name">
+        </form>
         <div id="tutorial-memorygame" class="quizy-memorygame">
       <ul>
           <li class="match1">
@@ -99,7 +103,10 @@
       return false;
     });
     function leaderboard(param) {
-    	$.post( "leaderboard.php", { name: "ajo", time: param.time, clicks: param.clicks }, function( data ) {
+    	var name = 'Elf on the Shelf';
+    	if($('#name').val() !== '')
+    		name = $('#name').val();
+    	$.post( "leaderboard.php", { name: name, time: param.time, clicks: param.clicks }, function( data ) {
   			var items = [];
             $.each( data.items, function( key, val ) {
             	items.push( "<li>" + val['name'] + " " + val['time'] + "</li>" );
