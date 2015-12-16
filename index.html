@@ -92,12 +92,17 @@
   <script src="js/jquery.quizymemorygame.js"></script>
   
   <script>
-    var quizyParams = {itemWidth: 156, itemHeight: 156, itemsMargin:40, colCount:4, animType:'flip' , flipAnim:'tb', animSpeed:250, resultIcons:true, randomised:true }; 
+    var quizyParams = {itemWidth: 156, itemHeight: 156, itemsMargin:40, colCount:4, animType:'flip' , flipAnim:'tb', animSpeed:250, resultIcons:true, randomised:true, onFinishCall: function(param){leaderboard(param)} }; 
     $('#tutorial-memorygame').quizyMemoryGame(quizyParams);
     $('#restart').click(function(){
       $('#tutorial-memorygame').quizyMemoryGame('restart');
       return false;
     });
+    function leaderboard(param) {
+    	$.post( "leaderboard.php", { name: "ajo", time: param.time, clicks: param.clicks }, function( data ) {
+  			console.log(data);
+		});
+    }
   </script>
 </body>
 </html>
