@@ -100,7 +100,15 @@
     });
     function leaderboard(param) {
     	$.post( "leaderboard.php", { name: "ajo", time: param.time, clicks: param.clicks }, function( data ) {
-  			console.log(data);
+  			var items = [];
+            $.each( data.items, function( key, val ) {
+            	items.push( "<li>" + val['name'] + " " + val['time'] + "</li>" );
+            });
+                     
+            $( "<ul/>", {
+            "class": "urls",
+            html: items.join( "" )
+            }).appendTo( "#quizy-game-summary" );
 		});
     }
   </script>
