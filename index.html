@@ -16,7 +16,7 @@
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
+  <link href='//fonts.googleapis.com/css?family=Medula+One' rel='stylesheet' type='text/css'>
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
@@ -36,11 +36,11 @@
   <div class="container">
     <div class="row">
       <div class="twelve columns">
-        <h4>Match the Map</h4>
         <form>
         	<label for="name">Your name</label>
         	<input id="name" name="name">
         </form>
+        <h1 class="header">Match the Map</h1>
         <div id="tutorial-memorygame" class="quizy-memorygame">
       <ul>
           <li class="match1">
@@ -96,7 +96,19 @@
   <script src="js/jquery.quizymemorygame.js"></script>
   
   <script>
-    var quizyParams = {itemWidth: 156, itemHeight: 156, itemsMargin:40, colCount:4, animType:'flip' , flipAnim:'tb', animSpeed:250, resultIcons:true, randomised:true, onFinishCall: function(param){leaderboard(param)} }; 
+    $(document).ready(function(){
+      var allTops = $(".quizy-mg-item-top");
+      for(var i = 0; i < allTops.length; i++) {
+        var top       = allTops[i];
+        var rand      = Math.floor(Math.random() * 12) + 1;
+        var randImage = "url('assets/patterns/" + rand + ".png')"
+        $(top)
+          .css("background-image", randImage)
+      }
+
+    });
+    var quizyParams = {itemWidth: 156, itemHeight: 240, itemsMargin:25, colCount:4, animType:'flip' , flipAnim:'lr', animSpeed:250, resultIcons:true, randomised:true };
+
     $('#tutorial-memorygame').quizyMemoryGame(quizyParams);
     $('#restart').click(function(){
       $('#tutorial-memorygame').quizyMemoryGame('restart');
