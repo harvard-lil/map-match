@@ -6,27 +6,52 @@
 /* the stle for the wrapper element */
 .quizy-memorygame{
   position:relative;
-  width:750px;
+  width:600px;
+  text-align: center;
+}
+
+.header {
+  position:relative;
+  width:700px;
+
+  text-align: center;
+  font-size: 60px;
+  color: #c2a34f;
+  border-bottom : 1px solid #a0a0a0;
+  margin-top : 20px;
+}
+
+.text-style1 {
+  max-width     : 80%;
+  text-align    : center;
+  font-size     : 34px;
+  color         : white;
+  border-bottom : 1px solid white;
+  border-top    : 1px solid white;
+}
+.quizy-mg-item {
+  background-color : #c2a34f;
 }
 
 /* styles of the card to show */
 .quizy-memorygame .mgcard-show{
   width:156px;
   height:106px;
-  background-color:#f2ecda;
-  color:#C2A34F;
+  color:#FFFFFF;
   font-size:1.2em;
 }
 
 .quizy-memorygame .mgcard-show p {
-	margin-top:50px;
+  margin: 50% auto;
 }
 
 .quizy-memorygame .quizy-mg-item{
   position:absolute;
   cursor:pointer;
   text-align:center;
-  background-color: #f2ecda !important;
+  background-color: #c2a34f !important;
+  border: 1px solid #a0a0a0;
+  cursor: url('assets/pointer.png'), default;
 }
 
 .quizy-memorygame .quizy-mg-item .quizy-mg-item-bottom, .quizy-memorygame .quizy-mg-item .quizy-mg-item-top{
@@ -38,8 +63,7 @@
 
 .quizy-mg-item .quizy-mg-item-top{
   background-color:#fff;
-  border:2px solid #C2A34F;
-  border-radius:2px;
+  border-radius:0px;
 }
 
 /* styles for the popup notifications */
