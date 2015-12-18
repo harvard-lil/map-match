@@ -10,25 +10,6 @@
   text-align: center;
 }
 
-.header {
-  position:relative;
-  width:700px;
-
-  text-align: center;
-  font-size: 60px;
-  color: #c2a34f;
-  border-bottom : 1px solid #a0a0a0;
-  margin-top : 20px;
-}
-
-.text-style1 {
-  max-width     : 80%;
-  text-align    : center;
-  font-size     : 34px;
-  color         : white;
-  border-bottom : 1px solid white;
-  border-top    : 1px solid white;
-}
 .quizy-mg-item {
   background-color : #c2a34f;
 }
@@ -36,13 +17,13 @@
 /* styles of the card to show */
 .quizy-memorygame .mgcard-show{
   width:156px;
-  height:106px;
+  height:156px;
   color:#FFFFFF;
   font-size:1.2em;
 }
 
 .quizy-memorygame .mgcard-show p {
-  margin: 50% auto;
+  margin: 33% auto;
 }
 
 .quizy-memorygame .quizy-mg-item{

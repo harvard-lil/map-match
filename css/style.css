@@ -12,3 +12,50 @@ body {
 	font-family: "Medula One", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
 }
+
+.quizy-memorygame .quizy-mg-item{
+  border: 1px solid #e0d2a8;
+}
+
+.mgcard-show img {
+  max-width: 155px;
+  max-height: 155px;
+}
+
+#banner {
+  width:687px;
+    border-bottom : 1px solid #C0C0C0;
+    height: 85px;
+}
+
+#banner h1{
+  font-size: 70px;
+  color: #c2a34f;
+
+}
+
+#banner p {
+  text-transform: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  color: #444;
+}
+
+#banner a {
+  color: #444;
+  text-decoration: none;
+  border-bottom: 1px solid #C0C0C0;
+}
+
+#banner a:hover {
+  border-bottom: 1px solid #444;
+}
+
+.text-style1 {
+  max-width     : 80%;
+  text-align    : center;
+  font-size     : 34px;
+  color         : white;
+  border-bottom : 1px solid white;
+  border-top    : 1px solid white;
+}

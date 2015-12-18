@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Your page title here :)</title>
+  <title>Map Match</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -26,7 +26,6 @@
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
 
 </head>
 <body>
@@ -34,50 +33,57 @@
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
-    <div class="row">
-      <div class="twelve columns">
-        <form>
+    <div class="row" id="banner">
+      <div class="four columns">
+        <!--<form>
         	<label for="name">Your name</label>
         	<input id="name" name="name">
-        </form>
-        <h1 class="header">Match the Map</h1>
+        </form>-->
+        <h1>Map Match</h1>
+      </div>
+      <div class="eight columns">
+        <p>Match the Harvard library shape with its name. Move quickly and you'll find your name on <a href="#">the leader board</a>.</p>
+      </div>
+    </div><!-- /row -->
+    <div class="row">
+      <div class="twelve columns">
         <div id="tutorial-memorygame" class="quizy-memorygame">
       <ul>
           <li class="match1">
-            HBS
+            <img src="images/countway.svg" >
           </li>
           <li class="match2">
-            LAW
+            <img src="images/baker.svg" >
           </li>
           <li class="match3">
-            GSD
+            <img src="images/langdell.svg" >
           </li>
           <li class="match4">
-            LAM
+            <img src="images/pusey.svg" >
           </li>
           <li class="match5">
-            FAL
+            <img src="images/widener.svg" >
           </li>
           <li class="match6">
-            WID
+            <img src="images/yenching.svg" >
           </li>
           <li class="match1">
-            <p class="text-style1">Business</p>
+            <p class="text-style1">Countway</p>
           </li>
           <li class="match2">
-            <p class="text-style1">Law</p>
+            <p class="text-style1">Baker</p>
           </li>
           <li class="match3">
-            <p class="text-style1">Design</p>
+            <p class="text-style1">Langdell</p>
           </li>
           <li class="match4">
-            <p class="text-style1">Lamont</p>
+            <p class="text-style1">Pusey</p>
           </li>
           <li class="match5">
-            <p class="text-style1">Fine Arts</p>
+            <p class="text-style1">Widener</p>
           </li>
           <li class="match6">
-            <p class="text-style1">Widener</p>
+            <p class="text-style1">Yenching</p>
           </li>
       </ul>
     </div>
@@ -97,6 +103,7 @@
   
   <script>
     $(document).ready(function(){
+
       var allTops = $(".quizy-mg-item-top");
       for(var i = 0; i < allTops.length; i++) {
         var top       = allTops[i];
@@ -106,8 +113,16 @@
           .css("background-image", randImage)
       }
 
+
+      $("#banner a").click(function() {
+        console.log('clciked')
+        event.preventDefault();
+        $('#quizy-game-summary').show();
+      });
+
+
     });
-    var quizyParams = {itemWidth: 156, itemHeight: 240, itemsMargin:25, colCount:4, animType:'flip' , flipAnim:'lr', animSpeed:250, resultIcons:true, randomised:true };
+    var quizyParams = {itemWidth: 156, itemHeight: 156, itemsMargin:20, colCount:4, animType:'flip' , flipAnim:'lr', animSpeed:130, resultIcons:true, randomised:true };
 
     $('#tutorial-memorygame').quizyMemoryGame(quizyParams);
     $('#restart').click(function(){
