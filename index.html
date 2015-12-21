@@ -25,6 +25,8 @@
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+
 
 </head>
 <body>
@@ -221,10 +223,12 @@
   // A helper to convert ms to something readable for the human
   // thanks, http://stackoverflow.com/a/19700358
   function msToTime(duration) {
-        var milliseconds = parseFloat((duration%1000)/100),
-            seconds = parseInt((duration/1000)%60);        
+        var milliseconds = parseInt((duration%1000)/100),
+            seconds = parseInt((duration/1000)%60);
 
-        return seconds + "." + milliseconds.toFixed(2);
+        
+
+        return seconds + "." + milliseconds;
     }
 
   </script>
