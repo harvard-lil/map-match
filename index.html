@@ -20,7 +20,6 @@
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
   <link rel="stylesheet" href="css/quizymemorygame.css">
   <link rel="stylesheet" href="css/style.css">
 
@@ -33,27 +32,23 @@
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
-    <div class="row" id="banner">
-      <div class="four columns">
-        <!--<form>
-        	<label for="name">Your name</label>
-        	<input id="name" name="name">
-        </form>-->
+    <div id="banner">
+      <span class="left">
         <h1>Map Match</h1>
+
+      </span>
+      <div class="right">
+        <p>Match the Harvard library shape with its name. Move quickly and you'll be <a href="#">a top matcher</a>.</p>
       </div>
-      <div class="eight columns">
-        <p>Match the Harvard library shape with its name. Move quickly and you'll find your name on <a href="#">the leader board</a>.</p>
-      </div>
-    </div><!-- /row -->
-    <div class="row">
-      <div class="twelve columns">
+    </div>
+      <div id="game-container">
         <div id="tutorial-memorygame" class="quizy-memorygame">
       <ul>
           <li class="match1">
             <img src="images/countway.svg" >
           </li>
           <li class="match2">
-            <img src="images/baker.svg" >
+            <span class="helper"></span><img src="images/baker.svg" >
           </li>
           <li class="match3">
             <img src="images/langdell.svg" >
@@ -87,6 +82,24 @@
           </li>
       </ul>
     </div>
+    </div>
+
+    <div id="leaderboard">
+      <h1>Top matchers</h1>
+
+      <div id="leader-list-container"></div>
+
+      <a href="#" id="replay-button"><button></button></a>
+    </div>
+
+    <div id="add-your-name">
+      <h1><span id="num-seconds"></span> seconds!</h1>
+      <p id="time-message">You are a top matcher. Enter your name and bask in the glory.</p>
+      <div id="form-container">
+        <form id="target" action="#">
+          <input id="name" name="name" type="text" maxlength="22">
+          <input type="submit" value="Submit name">
+        </form>
       </div>
     </div>
   </div>
@@ -97,13 +110,103 @@
   <script src="js/jquery-1.7.1.min.js"></script>
   <script>window.jQuery || document.write('<script src="../js/jquery-1.7.1.min.js"><\/script>')</script>
   <script src="js/jquery-ui-1.8.17.custom.min.js"></script>
-  
   <script src="js/jquery.flip.min.js"></script>
   <script src="js/jquery.quizymemorygame.js"></script>
   
   <script>
-    $(document).ready(function(){
+    // load the backgorunds on the tiles
+    $(document).ready(function() {
+      get_background_for_tiles();
+    });
 
+
+    // https://github.com/frenski/quizy-memorygame is a jquery plugin that manages
+    // game play. Set it up here.
+    var quizyParams = {itemWidth: 156, itemHeight: 156, itemsMargin:20, colCount:4, 
+        animType:'flip' , flipAnim:'lr', animSpeed:130, resultIcons:true, 
+        randomised:true, openDelay: 1200, onFinishCall: game_finished, gameSummary: false };
+
+    $('#tutorial-memorygame').quizyMemoryGame(quizyParams);
+
+    $("#banner a").click(function() {
+        event.preventDefault();
+        $('#replay-button button').html('Close');
+        draw_leaders();
+      });
+
+    $('#replay-button').click(function(){
+      $('#tutorial-memorygame').quizyMemoryGame('restart');
+      get_background_for_tiles();
+      $('#leaderboard').hide();
+      return false;
+    });
+
+    var game_clock;
+
+    $( "#target" ).submit(function( event ) {
+      var name = 'Elf on the Shelf';
+      if($('#name').val() !== '')
+        name = $('#name').val();
+
+        // Build the leaderboard markup and attach it
+        $.post( "leaderboard.php", { name: name, time: game_time }, function( data ) {
+          $('#add-your-name').hide();
+          draw_leaders();
+        });
+
+      event.preventDefault();
+    });
+
+
+    // The callback that gets fired when the game is complete
+    function game_finished(param) {
+      game_time = param.time;
+      
+      // get our existing leadboard times. if the time from the
+      // just complted game is within the top ten (or we don't
+      // have ten yet), post it as a new score
+      $.get( "leaderboard.php", function( data ) {
+        var new_leaderboard_time = false;
+        $.each( data.items, function( key, val ) {
+          if (param.time <= parseInt(val['time']) || data.items.length < 10) {
+            new_leaderboard_time = true;
+          }
+        });
+
+        if (new_leaderboard_time) {
+          $('#num-seconds').html(msToTime(param.time));
+          $('#add-your-name').show();
+          $('#replay-button button').html('Play again');
+        } else {
+          $('#replay-button button').html(msToTime(param.time) + ' seconds, try again');
+          draw_leaders();
+        }
+      });
+    }
+
+    function draw_leaders() {
+      $.get( "leaderboard.php", function( data ) {
+          var items = [];
+          var seconds;
+          $.each( data.items, function( key, val ) {
+            seconds = msToTime(val['time']);
+            items.push( "<li><span class='place'>" + (+key +1) + "</span><span class='time'> " + seconds + " secs</span><span class='name'>" + val['name'] + "</span></li>" );
+          });
+
+          $("#leader-list-container").empty();
+          $( "<ul/>", {
+            "class": "leaders",
+            html: items.join( "" )
+          }).appendTo("#leader-list-container");
+
+          $('#leaderboard').show();
+        });
+
+    }
+
+
+    // We set the background image of the tiles at random here
+    function get_background_for_tiles() {
       var allTops = $(".quizy-mg-item-top");
       for(var i = 0; i < allTops.length; i++) {
         var top       = allTops[i];
@@ -112,39 +215,20 @@
         $(top)
           .css("background-image", randImage)
       }
-
-
-      $("#banner a").click(function() {
-        console.log('clciked')
-        event.preventDefault();
-        $('#quizy-game-summary').show();
-      });
-
-
-    });
-    var quizyParams = {itemWidth: 156, itemHeight: 156, itemsMargin:20, colCount:4, animType:'flip' , flipAnim:'lr', animSpeed:130, resultIcons:true, randomised:true };
-
-    $('#tutorial-memorygame').quizyMemoryGame(quizyParams);
-    $('#restart').click(function(){
-      $('#tutorial-memorygame').quizyMemoryGame('restart');
-      return false;
-    });
-    function leaderboard(param) {
-    	var name = 'Elf on the Shelf';
-    	if($('#name').val() !== '')
-    		name = $('#name').val();
-    	$.post( "leaderboard.php", { name: name, time: param.time, clicks: param.clicks }, function( data ) {
-  			var items = [];
-            $.each( data.items, function( key, val ) {
-            	items.push( "<li>" + val['name'] + " " + val['time'] + "</li>" );
-            });
-                     
-            $( "<ul/>", {
-            "class": "urls",
-            html: items.join( "" )
-            }).appendTo( "#quizy-game-summary" );
-		});
     }
+
+
+  // A helper to convert ms to something readable for the human
+  // thanks, http://stackoverflow.com/a/19700358
+  function msToTime(duration) {
+        var milliseconds = parseInt((duration%1000)/100),
+            seconds = parseInt((duration/1000)%60);
+
+        
+
+        return seconds + "." + milliseconds;
+    }
+
   </script>
 </body>
 </html>

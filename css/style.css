@@ -10,7 +10,6 @@
 
 body {
 	font-family: "Medula One", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-transform: uppercase;
 }
 
 .quizy-memorygame .quizy-mg-item{
@@ -18,26 +17,40 @@ body {
 }
 
 .mgcard-show img {
+  vertical-align: middle;
   max-width: 155px;
   max-height: 155px;
 }
 
 #banner {
-  width:687px;
+    width: 686px;
+    margin: 15px auto 0 auto;
     border-bottom : 1px solid #C0C0C0;
     height: 85px;
 }
 
-#banner h1{
+#banner .left {
+  float: left;
+  width: 35%;
+  display: inline;
+}
+
+#banner .right {
+  float: left;
+  width: 65%;
+}
+
+h1{
+  display: inline;
   font-size: 70px;
   color: #c2a34f;
-
+  text-transform: uppercase;
 }
 
 #banner p {
-  text-transform: none;
+  margin-top: 21px; /* oh so rough */
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   color: #444;
 }
 
@@ -54,8 +67,130 @@ body {
 .text-style1 {
   max-width     : 80%;
   text-align    : center;
-  font-size     : 34px;
+  font-size     : 36px;
+  padding: 5px 0;
   color         : white;
   border-bottom : 1px solid white;
   border-top    : 1px solid white;
+}
+
+#game-container {
+  width: 686px;
+  height: 550px;
+  margin: 30px auto 0 auto;
+}
+
+#leaderboard {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -345px;
+  margin-left: -200px;
+  width: 400px;
+  height: 450px;
+  z-index: 1000;
+  background: #fff;
+  background-image: url('../assets/patterns/9.png');
+  border: 1px solid #e0d2a8;
+}
+
+#leaderboard h1, #add-your-name h1 {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#add-your-name {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px;
+  margin-left: -250px;
+  width: 500px;
+  height: 220px;
+  z-index: 1000;
+  background: #fff;
+  background-image: url('../assets/patterns/9.png');
+  border: 1px solid #e0d2a8;
+}
+
+#time-message {
+  text-align: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  color: #444;
+}
+
+input, button {
+  padding: 17px 10px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  color: #444;
+}
+
+input[type=text] {
+  width: 340px;
+  margin-left: 5px;
+}
+
+input[type=submit], button {
+  padding: 18px 10px;
+  color: #fff;
+  background:#c2a34f; 
+  border:1px solid #c2a34f;
+}
+
+button {
+   width: 250px;
+   margin-left: 75px;
+   margin-top: 50px;
+}
+
+#form-container {
+  margin-top: 30px;
+}
+
+.helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.place {
+  float:left;
+  margin:0;
+  width:15%;
+}
+
+.name {
+  float:left;
+  margin:0;
+  width:60%;
+  text-align: center;
+}
+
+.time {
+  float:left;
+  margin:0;
+  width:25%;
+}
+
+.name {
+  float: right;
+}
+
+ul {
+  list-style-type: none;
+  margin: 40px 0px;
+}
+
+ul li {
+  margin: 6px 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  color: #444;
+  width: 100%;
 }

@@ -86,7 +86,9 @@ if(!Array.indexOf){
         // A function to handle the element click
         var handleClick = function(){
           // starts the timer
-          if(numTotalClicks==0) gameTimer = setInterval(incTime,1000);
+          if(numTotalClicks==0){
+            gameTimer = new Date().getTime();
+          }
           // counts the clicks
           numTotalClicks ++;
           // keeps the class for the clicked item
@@ -116,7 +118,7 @@ if(!Array.indexOf){
               // If all of the cards are turned and the game is complete
               if(numMatches == itemsNum/2){
                 // removes the timer
-                clearInterval(gameTimer);
+                gameTimer = new Date().getTime() - gameTimer;
                 // if game summary is set, adds the info to it and shows it.
                 if(opts.gameSummary){
                   $('div#quizy-game-summary').
@@ -129,7 +131,7 @@ if(!Array.indexOf){
                 }
                 // if is set makes an AJAX call and sends the the necessary params
                 if(opts.onFinishCall!=''){
-                  opts.onFinishCall({ clicks: numTotalClicks, time: numSeconds } );
+                  opts.onFinishCall({ clicks: numTotalClicks, time: gameTimer } );
                 }
               }
             // if they dont have the same class = WE DON'T HAVE a match
@@ -235,7 +237,7 @@ if(!Array.indexOf){
 
         // time functions
         var incTime = function(){
-          numSeconds ++;
+          numSeconds +=100;
         }
 
         // function for adding the inner HTMK

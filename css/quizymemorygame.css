@@ -23,7 +23,8 @@
 }
 
 .quizy-memorygame .mgcard-show p {
-  margin: 33% auto;
+  margin: 31% auto;
+  padding:  12px 0;
 }
 
 .quizy-memorygame .quizy-mg-item{
