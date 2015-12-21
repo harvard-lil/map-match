@@ -152,7 +152,7 @@
         name = $('#name').val();
 
         // Build the leaderboard markup and attach it
-        $.post( "leaderboard.php", { name: name, time: game_time }, function( data ) {
+        $.post( "leaderboard.php?ts=" + new Date().getMilliseconds(), { cache : false, name: name, time: game_time }, function( data ) {
           $('#add-your-name').hide();
           draw_leaders();
         });
