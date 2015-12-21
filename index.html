@@ -166,7 +166,13 @@
       // get our existing leadboard times. if the time from the
       // just complted game is within the top ten (or we don't
       // have ten yet), post it as a new score
-      $.get( "leaderboard.php", function( data ) {
+
+      $.ajax({
+        url: "leaderboard.php",
+        cache: false
+      })
+      .done(function( data ) {
+        
         var new_leaderboard_time = false;
         $.each( data.items, function( key, val ) {
           if (param.time <= parseInt(val['time']) || data.items.length < 10) {
@@ -183,10 +189,20 @@
           draw_leaders();
         }
       });
+
+
+
+
     }
 
     function draw_leaders() {
-      $.get( "leaderboard.php", function( data ) {
+
+      $.ajax({
+        url: "leaderboard.php",
+        cache: false
+      })
+      .done(function( data ) {
+
           var items = [];
           var seconds;
           $.each( data.items, function( key, val ) {
@@ -201,7 +217,7 @@
           }).appendTo("#leader-list-container");
 
           $('#leaderboard').show();
-        });
+      });
 
     }
 
