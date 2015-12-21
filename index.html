@@ -54,7 +54,7 @@
             <img src="images/langdell.svg" >
           </li>
           <li class="match4">
-            <img src="images/pusey.svg" >
+            <span class="helper"></span><img src="images/lamont.svg" >
           </li>
           <li class="match5">
             <img src="images/widener.svg" >
@@ -72,7 +72,7 @@
             <p class="text-style1">Langdell</p>
           </li>
           <li class="match4">
-            <p class="text-style1">Pusey</p>
+            <p class="text-style1">Lamont</p>
           </li>
           <li class="match5">
             <p class="text-style1">Widener</p>
@@ -221,12 +221,10 @@
   // A helper to convert ms to something readable for the human
   // thanks, http://stackoverflow.com/a/19700358
   function msToTime(duration) {
-        var milliseconds = parseInt((duration%1000)/100),
-            seconds = parseInt((duration/1000)%60);
+        var milliseconds = parseFloat((duration%1000)/100),
+            seconds = parseInt((duration/1000)%60);        
 
-        
-
-        return seconds + "." + milliseconds;
+        return seconds + "." + milliseconds.toFixed(2);
     }
 
   </script>
